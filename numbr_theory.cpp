@@ -25,6 +25,22 @@ map<ll, ll> factors(ll n) {//get the prime factors of an integer n
 	if (n > 1)a[n]++;
 	return a;
 }
+ll rangeFactorization1(ll n) {//get sum of number of divisors for each number from one to n
+	//forward thinking
+	ll sum = 0;
+	for (int i = 1;i <= n;i++)sum += divisors(i).size();
+	return sum;
+}
+ll rangeFactorization2(ll n) {//get sum of number of divisors for each number from one to n
+	//backward thinking 
+	vector<ll>numOfFactors(n + 1);
+	for (int i = 1;i <= n;i++)
+		for (int j = i;j <= n;j += i)numOfFactors[j]++;
+	//git num of factors for each element from one to n
+	ll sum = 0;
+	for (int i = 0;i < n;i++)sum += numOfFactors[i];
+	return sum;
+}
 //get the greatest common divisor of two numbers
 ll gcd(ll a, ll b) {// Euclid's algorithm
 	return (not b ? a : gcd(b, a % b));
