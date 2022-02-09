@@ -1,6 +1,12 @@
 #include<bits\stdc++.h>
 using namespace std;
 typedef long long ll;
+vector<pair<ll, ll>>generate_divisors(ll n) {//generate two numbers there product equal n
+	vector<pair<ll, ll>>ans;
+	for (ll i = 1;i * i <= n;i++)
+		if (n % i == 0)ans.push_back({ i,n / i });
+	return ans;
+}
 map<ll, ll> factors(ll n) {//get the prime factors of an integer n
 	map<ll, ll>a;
 	for (ll i = 2;i * i <= n;i++) {
