@@ -68,6 +68,22 @@ void generate_permutaion2(){
 		cout<<endl;
 	} while (next_permutation(permutation.begin(),permutation.end()));
 }
+//backTracking 
+// get all possible solutions for a password from 1 to n
+vector<int>temp;
+void backtrack(int n,int k){
+	if(n==k){
+		//process
+		for(int i=0;i<n;i++)cout<<temp[i]<<" ";cout<<endl;
+	}
+	else {
+		for(int i=1;i<10;i++){
+			temp.push_back(i);//do
+			backtrack(n,k+1);//call
+			temp.pop_back();//undo
+		}
+	}
+}
 void solve() {
 	base.resize(n);
 	chosen.resize(n);
