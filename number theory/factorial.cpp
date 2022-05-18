@@ -50,7 +50,15 @@ int FactN_primePower(int n,int p){//O(log n base p)   ||| n should be the factor
 			check power in n!, and follow as above
 
 */
-
+int c[100][100];
+void nCr() {
+	int i, j;
+	for (i = 1; i <= 60; i++) {
+		c[i][0] = c[i][i] = 1;
+		for (j = 1; j < i; j++) c[i][j] = c[i - 1][j - 1] + c[i - 1][j];
+ 
+	}
+}
 void solve() {
 
 }
