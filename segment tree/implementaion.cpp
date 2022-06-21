@@ -50,6 +50,21 @@ ll remove(ll num, ll st, ll en, ll p) {
 	if (num <= (st + en) / 2)return remove(num, st, (st + en) / 2, 2 * p);
 	return interval[2 * p] +  remove(num, (st + en) / 2 + 1, en, 2 * p + 1);
 }
+ll get_elements(ll i, ll j, ll s, ll e, ll p) {
+	if (s >= i and e <= j)
+		return interval[p];
+	else if (i > (s + e) / 2)
+		return get_elements(i, j, (s + e) / 2 + 1, e, 2 * p + 1);
+	else if (j <= (s + e) / 2)
+		return get_elements(i, j, s, (s + e) / 2, 2 * p);
+	else return get_elements(i, j, s, (s + e) / 2, 2 * p) + get_elements(i, j, (s + e) / 2 + 1, e, 2 * p + 1);
+}
+void clear_tree(ll s, ll e, ll p = 1) {
+	if (p>=N or not interval[p])return;
+	interval[p] = 0;
+	clear_tree(s, (s + e) / 2, 2 * p);
+	clear_tree((s + e) / 2 + 1, e, 2 * p + 1);
+}
 void solve() {
 	cout << intialOne(0, 5, 1) << endl;
 	interval;
