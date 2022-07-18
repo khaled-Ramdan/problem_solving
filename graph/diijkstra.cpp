@@ -12,23 +12,25 @@ ll lcm(ll a, ll b) { return a * b / gcd(a, b); }
 /*وَقُلِ اعْمَلُوا فَسَيَرَى اللَّهُ عَمَلَكُمْ*/
 const int dx[8] = { 0, 0, 1, -1, 1, 1, -1, -1 };
 const int dy[8] = { 1, -1, 0, 0, -1, 1, 1, -1 };
-int n, m, u, v, c, src, tar;
-vector<vector<pair<int, int>>>g;
-int dijkstra(int src,int tar) {
-	vector<int>dis(n, 1e9);
-	priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>>q;
+ll n, m, u, v, c, src, tar;
+vector<vector<pair<ll, ll>>>g;
+vector<ll>parent;
+ll dijkstra(ll src,ll tar) {
+	vector <ll> dis(n + 1, INF);
+	priority_queue < pair<ll, ll>, vector < pair < ll, ll >> , greater<pair<ll, ll>> > q;
 	dis[src] = 0;
 	q.push({ 0,src });
 	while (q.size()){
-		int u = q.top().second;
-		int c = q.top().first;
+		ll u = q.top().second;
+		ll c = q.top().first;
 		q.pop();
 		if (u == tar)return c;
 		if (c != dis[u])continue;
 		for (auto& p : g[u]) {
-			int v = p.second;
-			int vc = p.first;
+			ll v = p.second;
+			ll vc = p.first;
 			if (dis[v] > dis[u] + vc) {
+				parent[v] = u;
 				dis[v] = dis[u] + vc;
 				q.push({ dis[v],v });
 			}
