@@ -13,7 +13,7 @@ const int dy[8] = { 1, -1, 0, 0, -1, 1, 1, -1 };
 ll n, m, x, y, c;
 vector<vector<pair<ll, ll>>>g;
 struct myComp {
-    constexpr bool operator()(pair<int, int> const& a,pair<int, int> const& b) const noexcept{
+    constexpr bool operator()(pair<int, int> const& a, pair<int, int> const& b) const noexcept {
         return a.second < b.second;
     }
 };
@@ -26,7 +26,7 @@ ll dijkstra(int src, int tar) {
     priority_queue<pair<ll, ll>, vector<pair<ll, ll>>, greater<pair<ll, ll>>>q;
     dis[src] = 0;
     q.push({ 0,src });
-    while (q.size()){
+    while (q.size()) {
         ll u = q.top().second, uc = q.top().first;
         q.pop();
         if (u == tar)return c;
@@ -52,7 +52,7 @@ pair<bool, ll>bellman1(int src, int tar) {
                 dis[e.to] = dis[e.from] + e.cost;
                 isUpdated = 1;
             }
-       }
+        }
         if (!isUpdated)break;
         if (i == n - 1)
             hasCycles = 1;
@@ -89,34 +89,51 @@ ll bellman2(int src, int tar) {
     if (hasCycles[tar])return -1;
     return dis[tar];
 }
-ll Fdis[500][500] = {};
-void floyd_warshall() {//dp algorithm
-    int i = 0, j = 0;
-    while (i < n and j < n)
-    {
-        Fdis[i][j] = 0;
-        i++, j++;
+ll Fdis[500][500], nxt[505][505];
+void init_floyed() {
+    for (int i = 0; i < 500; i++) {
+        for (int j = 0; j < 500; j++) {
+            if (i == j)continue;
+            Fdis[i][j] = INF;
+        }
     }
+}
+void floyd_warshall() {//dp algorithm
     for (int k = 0; k < n; k++)
         for (int u = 0; u < n; u++)
             for (int v = 0; v < n; v++)
-                Fdis[u][v] = min(Fdis[u][v], Fdis[u][k] + Fdis[k][v]);
+                if (Fdis[u][v] > Fdis[u][k] + Fdis[k][v])
+                    Fdis[u][v] = Fdis[u][k] + Fdis[k][v]
+                    ,nxt[u][v] = nxt[u][k];
 }
 void solve() {
     cin >> n >> m;
     g.resize(n + 1);
-    fill(Fdis, Fdis + sizeof(Fdis), INF);
+    init_floyed();
     for (int i = 0; i < m; i++) {
         cin >> x >> y >> c;
         g[x].push_back({ c,y });
         g[y].push_back({ c,x });
         edge tmp = { x - 1,y - 1,c };
         adj.push_back(tmp);
-        Fdis[x - 1][y - 1] = c;
+        Fdis[x - 1][y - 1] = min(c, Fdis[x - 1][y - 1]);
+        Fdis[y - 1][x - 1] = min(c, Fdis[y - 1][x - 1]);
+        nxt[x - 1][y - 1] = y - 1;
+        nxt[y - 1][x - 1] = x - 1;
     }
     int src, tar;
     cin >> src >> tar;
     cout << dijkstra(src, tar) << endl;
+    floyd_warshall();
+    vector<ll>path;
+    path.push_back(src);
+    while (src!=tar)
+    {
+        src = nxt[src][tar];
+        path.push_back(src);
+    }
+    for (int i = 0; i < path.size(); i++)
+        cout << path[i] << " ";
 }
 int main() {
     IO;
