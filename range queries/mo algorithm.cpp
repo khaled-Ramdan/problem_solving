@@ -16,6 +16,10 @@ ll gcd(ll a, ll b) { return a ? gcd(b % a, a) : b; }
 ll lcm(ll a, ll b) { return a * b / gcd(a, b); }
 const int dx[8] = { 0, 0, 1, -1, 1, 1, -1, -1 };
 const int dy[8] = { 1, -1, 0, 0, -1, 1, 1, -1 };
+/*
+time complexity : srqt(n)*(n+q)
+
+*/
 struct query{
     int l, r, b_idx, q_idx;
     query() {};
