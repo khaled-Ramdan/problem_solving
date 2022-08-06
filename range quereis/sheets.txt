@@ -1,0 +1,214 @@
+
+يارب ACPC
+
+
+
+
+1.1
+
+https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=1626
+https://www.spoj.com/problems/PT07Y/en/		//AC
+https://codeforces.com/problemset/problem/61/D	//Ac
+https://codeforces.com/problemset/problem/755/C  //AC
+https://codeforces.com/problemset/problem/430/C
+https://codeforces.com/problemset/problem/242/C	 //AC
+https://codeforces.com/problemset/problem/107/A  //AC
+https://www.spoj.com/problems/ESCJAILA/en/
+https://atcoder.jp/contests/abc132/tasks/abc132_e?lang=en
+https://codeforces.com/problemset/problem/1214/D //AC
+
+
+1.2
+
+https://vjudge.net/problem/SPOJ-MST/origin		\\AC
+https://vjudge.net/problem/SPOJ-BLINNET/origin
+https://vjudge.net/problem/CodeForces-1139C/origin		//AC
+https://vjudge.net/problem/CodeForces-939D/origin		\\AC
+https://vjudge.net/problem/CodeForces-1253D/origin		//AC
+https://vjudge.net/problem/UVA-11987/origin
+https://vjudge.net/problem/CodeForces-1559D1/origin		//AC
+https://vjudge.net/problem/CodeForces-1176E/origin		//AC
+https://vjudge.net/problem/CodeForces-1131F/origin		//AC
+https://vjudge.net/problem/SPOJ-KOICOST/origin
+https://codeforces.com/contest/1213/problem/G			//AC
+
+
+2.1
+
+
+https://vjudge.net/problem/SPOJ-HIGHWAYS/origin		//ac
+https://vjudge.net/problem/UVA-10986/origin		//ac
+https://vjudge.net/problem/UVA-558/origin
+https://vjudge.net/problem/AtCoder-abc061_d/origin		//ac
+https://vjudge.net/problem/CodeForces-20C/origin		//ac
+https://vjudge.net/problem/Gym-101498L/origin
+https://vjudge.net/problem/SPOJ-ADATRIP/origin
+https://vjudge.net/problem/CodeForces-938D/origin
+https://vjudge.net/problem/CodeForces-1433G/origin
+https://vjudge.net/problem/CodeForces-449B/origin
+
+
+2.2
+
+https://vjudge.net/problem/SPOJ-ROHAAN/origin
+https://vjudge.net/problem/CodeForces-33B/origin
+https://vjudge.net/problem/UVA-10724/origin
+https://vjudge.net/problem/UVA-423/origin
+https://vjudge.net/problem/CodeForces-25C/origin
+https://vjudge.net/problem/UVA-10048/origin
+https://vjudge.net/problem/SPOJ-ARBITRAG/origin
+https://vjudge.net/problem/CodeForces-295B/origin
+https://vjudge.net/problem/CodeForces-1202B/origin
+https://vjudge.net/problem/UVA-13211/origin
+
+
+
+3.1 & 3.2 dp 
+
+<!!!! Ahmed nasser didn't do a very great job explaining iterative dp , so I stringly recommend Tushar's playlist
+https://www.youtube.com/user/tusharroy2525/playlists !!!>
+
+
+https://vjudge.net/problem/SPOJ-FARIDA/origin			//ac
+https://vjudge.net/problem/SPOJ-ELIS/origin			//ac
+https://vjudge.net/problem/UVA-357/origin
+https://vjudge.net/problem/CodeForces-189A/origin		//ac
+https://vjudge.net/problem/CodeForces-166E/origin		//ac
+https://vjudge.net/problem/SPOJ-EDIST/origin
+https://vjudge.net/problem/SPOJ-AIBOHP/origin
+https://vjudge.net/problem/CodeForces-225C/origin		//ac
+https://vjudge.net/problem/CodeForces-711C/origin		//ac
+https://vjudge.net/problem/CodeForces-984D/origin		//..
+https://vjudge.net/problem/UVA-357/origin
+https://vjudge.net/problem/CodeForces-455A/origin		//ac
+https://vjudge.net/problem/CodeForces-545C/origin		//ac
+https://vjudge.net/problem/CodeForces-414B/origin		//ac
+https://vjudge.net/problem/UVA-10453/origin
+https://vjudge.net/problem/CodeForces-474D/origin		//ac
+https://vjudge.net/problem/CodeForces-1249E/origin		//ac
+https://vjudge.net/problem/POJ-1260/origin
+https://vjudge.net/problem/UVA-526/origin
+https://vjudge.net/problem/UVA-348/origin
+
+
+4.1 TSP
+
+https://vjudge.net/problem/UVA-10496/origin
+https://vjudge.net/problem/UVA-11284/origin
+https://vjudge.net/problem/UVA-216/origin
+https://vjudge.net/problem/UVA-10911/origin
+https://vjudge.net/problem/SPOJ-HIST2/origin
+https://vjudge.net/problem/SPOJ-TRSTAGE/origin
+https://vjudge.net/problem/CodeForces-234F/origin
+https://vjudge.net/problem/UVA-11404/origin
+https://vjudge.net/problem/CodeForces-1389B/origin
+https://vjudge.net/problem/CodeForces-467C/origin
+
+
+
+4.2
+
+https://vjudge.net/problem/SPOJ-NAJPF/origin
+https://vjudge.net/problem/SPOJ-NHAY/origin
+https://vjudge.net/problem/SPOJ-ADACLEAN/origin
+https://vjudge.net/problem/CodeForces-271D/origin
+https://vjudge.net/problem/SPOJ-PHONELST/origin
+https://vjudge.net/problem/SPOJ-EPALIN/origin
+https://vjudge.net/problem/HackerRank-almost-equal-strings/origin
+
+
+5.1
+
+https://vjudge.net/problem/SPOJ-NHAY/origin
+https://vjudge.net/problem/SPOJ-NAJPF/origin
+https://vjudge.net/problem/SPOJ-EPALIN/origin
+https://vjudge.net/problem/UVA-455/origin
+https://vjudge.net/problem/SPOJ-FILRTEST/origin
+https://vjudge.net/problem/CodeForces-126B/origin
+https://vjudge.net/problem/SPOJ-PERIOD/origin
+https://vjudge.net/problem/CodeForces-432D/origin
+
+
+5.2
+
+https://vjudge.net/problem/SPOJ-PHONELST/origin
+https://vjudge.net/problem/CodeForces-346B/origin
+https://vjudge.net/problem/CodeForces-271D/origin
+https://vjudge.net/problem/SPOJ-ADAINDEX/origin
+https://vjudge.net/problem/SPOJ-TRYCOMP/origin
+https://vjudge.net/problem/CodeChef-NPLFLF/origin
+https://vjudge.net/problem/CodeForces-808G/origin
+https://vjudge.net/problem/UVA-11022/origin
+
+
+
+6.1
+
+
+https://vjudge.net/problem/SPOJ-RMQSQ/origin
+https://vjudge.net/problem/SPOJ-THRBL/origin
+https://vjudge.net/problem/CodeForces-872B/origin
+https://vjudge.net/problem/CodeForces-1473D/origin
+https://vjudge.net/problem/CodeForces-1257D/origin
+https://vjudge.net/problem/CodeForces-1472E/origin
+https://vjudge.net/problem/CodeForces-1549D/origin
+https://vjudge.net/problem/CodeForces-475D/origin
+
+
+6.2
+
+https://vjudge.net/problem/SPOJ-LCASQ/origin
+https://vjudge.net/problem/SPOJ-LCA/origin
+https://vjudge.net/problem/SPOJ-POLICEMEN/origin
+https://vjudge.net/problem/SPOJ-NTICKETS/origin
+https://vjudge.net/problem/CodeForces-832D/origin
+https://vjudge.net/problem/UVA-10938/origin
+https://vjudge.net/problem/CodeForces-208E/origin
+
+
+
+7.1
+
+
+https://vjudge.net/problem/SPOJ-DQUERY/origin
+https://vjudge.net/problem/SPOJ-GIVEAWAY/origin
+https://vjudge.net/problem/UVA-12003/origin
+https://vjudge.net/problem/CodeForces-86D/origin
+https://vjudge.net/problem/SPOJ-FREQ2/origin
+https://vjudge.net/problem/SPOJ-ADANUM/origin
+https://vjudge.net/problem/CodeForces-13E/origin
+
+
+
+7.2
+
+https://vjudge.net/problem/UVA-12086/origin
+https://vjudge.net/problem/SPOJ-MATSUM/origin
+https://vjudge.net/problem/LightOJ-1266/origin
+https://vjudge.net/problem/SPOJ-DCEPC206/origin
+https://vjudge.net/problem/CodeForces-1234D/origin
+https://vjudge.net/problem/SPOJ-NKTEAM/origin
+https://vjudge.net/problem/SPOJ-SUMSUM/origin
+
+
+8.1
+
+
+https://vjudge.net/problem/UVA-12086/origin
+https://vjudge.net/problem/CodeForces-1234D/origin	//ac
+https://vjudge.net/problem/SPOJ-KGSS/origin
+https://vjudge.net/problem/CodeForces-339D/origin	//ac
+https://vjudge.net/problem/CodeForces-1473D/origin	//ac
+https://vjudge.net/problem/CodeForces-1472E/origin
+https://vjudge.net/problem/CodeForces-1249D2/origin
+
+
+
+8.2
+
+
+https://vjudge.net/problem/SPOJ-HORRIBLE/origin
+https://vjudge.net/problem/CodeForces-52C/origin
+https://vjudge.net/problem/SPOJ-LITE/origin
+https://vjudge.net/problem/SPOJ-CNTPRIME/origin
+https://vjudge.net/problem/SPOJ-MULTQ3/origin
