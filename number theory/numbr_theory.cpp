@@ -95,3 +95,78 @@ ll modpow(ll base,ll pow,int mod){
 	if(pow%2==1)u=(u*base)%mod;
 	return u;
 }
+
+///.........................................................................modoular division
+// C++ function for extended Euclidean Algorithm
+int gcdExtended(int a, int b, int *x, int *y);
+ 
+// Function to find modulo inverse of b. It returns
+// -1 when inverse doesn't
+int modInverse(int b, int m)
+{
+    int x, y; // used in extended GCD algorithm
+    int g = gcdExtended(b, m, &x, &y);
+ 
+    // Return -1 if b and m are not co-prime
+    if (g != 1)
+        return -1;
+ 
+    // m is added to handle negative x
+    return (x%m + m) % m;
+}
+ 
+// Function to compute a/b under modulo m
+int modDivide(int a, int b, int m)
+{
+    a = a % m;
+    int inv = modInverse(b, m);
+    return (inv * a) % m;
+}
+ 
+// C function for extended Euclidean Algorithm (used to
+// find modular inverse.
+int gcdExtended(int a, int b, int *x, int *y)
+{
+    // Base Case
+    if (a == 0)
+    {
+        *x = 0, *y = 1;
+        return b;
+    }
+ 
+    int x1, y1; // To store results of recursive call
+    int gcd = gcdExtended(b%a, a, &x1, &y1);
+ 
+    // Update x and y using results of recursive
+    // call
+    *x = y1 - (b/a) * x1;
+    *y = x1;
+ 
+    return gcd;
+}
+
+//.........................................................another impl...........
+LL f[maxn];
+long long extend_gcd(long long a,long long b,long long &x,long long &y)
+{
+  if(a==0&&b==0) return -1;
+  if(b==0){x=1;y=0;return a;}
+  long long d=extend_gcd(b,a%b,y,x);
+  y-=a/b*x;
+  return d;
+}
+long long mod_reverse(long long a,long long n)
+{
+  long long x,y;
+  long long d=extend_gcd(a,n,x,y);
+  if(d==1) return (x%n+n)%n;
+  else return -1;
+}
+ 
+LL C(LL n, LL m)
+{
+  long long A = f[n];
+  long long B = f[n - m] * f[m] % p;
+  long long C = mod_reverse(B, p);
+  return A * C % p;
+}
