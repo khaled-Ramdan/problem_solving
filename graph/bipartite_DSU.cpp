@@ -29,6 +29,7 @@ struct DSU
 		siz.resize(n + 1,1);
 		len.resize(n + 1);
 		bipartite.resize(n + 1);
+		iota(par.begin(), par.end(), 0);
 	}
 	pair<int, int>parent(int u) {
 		if (u == par[u])return { u,0 };
