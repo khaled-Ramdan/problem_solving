@@ -26,7 +26,7 @@ struct DSU
 	DSU(int ln) {
 		n = ln;
 		par.resize(n + 1);
-		siz.resize(n + 1);
+		siz.resize(n + 1,1);
 		len.resize(n + 1);
 		bipartite.resize(n + 1);
 	}
