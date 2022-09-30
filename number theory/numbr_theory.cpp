@@ -163,10 +163,10 @@ long long mod_reverse(long long a,long long n)
   else return -1;
 }
  
-LL C(LL n, LL m)
+ll C(ll n, ll m,ll Mod)
 {
   long long A = f[n];
-  long long B = f[n - m] * f[m] % p;
-  long long C = mod_reverse(B, p);
-  return A * C % p;
+  long long B = f[n - m] * f[m] % Mod;
+  long long C = mod_reverse(B, Mod);
+  return ((A * C % Mod)+Mod)%Mod;
 }
