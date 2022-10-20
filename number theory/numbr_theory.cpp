@@ -170,3 +170,26 @@ ll C(ll n, ll m,ll Mod)
   long long C = mod_reverse(B, Mod);
   return ((A * C % Mod)+Mod)%Mod;
 }
+
+
+// count number of integers divisble by x not y in a range from 1 to  N 
+int countNumbers(int X, int Y, int N)
+{
+
+	// Count total number divisible by X
+	int divisibleByX = N / X;
+
+	// Count total number divisible by Y
+	int divisibleByY = N / Y;
+
+	// Count total number divisible by either X or Y
+	int LCM = (X * Y) / gcd(X, Y);
+	int divisibleByLCM = N / LCM;
+	int divisibleByXorY = divisibleByX + divisibleByY
+		- divisibleByLCM;
+
+	// Count total numbers divisible by X but not Y
+	int divisibleByXnotY = divisibleByXorY
+		- divisibleByY;
+	return divisibleByXnotY;
+}
