@@ -181,3 +181,29 @@ ll countDivibleByXNotY(ll X, ll Y, ll N)
 	ll divisibleByXnotY = divisibleByXorY - divisibleByY;
 	return divisibleByXnotY;
 }
+
+
+
+///...............Smallest prime Factor............
+//smallest prime factor
+const int N= 1e6;
+int p[N];
+void spf() {
+	for (int i = 2; i < N; i++) {
+		if (p[i])continue;
+		for (ll j = i; j < N; j += i)
+			p[j] = i;
+	}
+}
+map<ll, ll> factors(ll n) {
+	map<ll, ll>ret;
+	while (n > 1)
+	{
+		ll spf = p[n];
+		while (n % spf == 0) {
+			ret[spf]++;
+			n /= spf;
+		}
+	}
+	return ret;
+}
