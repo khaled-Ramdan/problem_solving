@@ -66,23 +66,21 @@ ll totient(ll n) {
 	//if qutiont(n)==n-1 : n is prime
 }
 //get prime number in time O(.5 * sqrt(n))
-bool is_prime(int n) {
+bool is_prime(ll n) {
 	if (n == 2)return true;
 	if (n == 1 or not(n%2))return false;
-	for (int i = 3;i * i <= n;i +=2)if (!(n % i))return false;
+	for (ll i = 3;i * i <= n;i +=2)if (!(n % i))return false;
 	return true;
 }
 //git prime numbers from one to n in time O(n*log(log(n))) nearly = O(n)
-vector<long long> sevie(long long n) {
+vector<long long> sieve(long long n) {
 	vector<bool>state(n+1, 1);
 	vector<long long>result;
 	state[0] = state[1] = 0;
 	for (long long i = 2;i <= n;i++) {
 		if (state[i]) {
-			//push value in result vector
 			result.push_back(i);
-			//make all multipliers equal zero for this number starting from its squared value
-			for (long long j = i * i;j <= n;j += i)state[j] = false;//time complexity log(log(n))
+			for (long long j = i * i;j <= n;j += i)state[j] = false;
 		}
 	}
 	return result;
