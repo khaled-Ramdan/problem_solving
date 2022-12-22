@@ -21,29 +21,29 @@ const int dy[9] = { 1, -1, 0, 0, -1, 1, 1, -1, 0 };
 class segmentTree {
 	struct data
 	{
-		ll sum, pref, suff, best;
+		ll best, sum, pref, suff;
 		data(ll val) {
 			sum = val;
-			pref = suff = best = max(0LL, val);
+			best = pref = suff = max(0LL, val);
 		}
 	};
 	vector<data>tree;
 public:
 	segmentTree(int n = N) {
-		tree.assign(4 * n, data(0));
+		tree.assign(4 * n, 0);
 	}
 	ll curBest() {
 		return tree[1].best;
 	}
-	void build(const vector<ll>& v, int p, int st, int en) {
+	void build(const vector<ll>& v, int st, int en, int p) {
 		if (st == en)return tree[p] = data(v[st]), void();
-		build(v, 2 * p, st, (st + en) / 2);
-		build(v, 2 * p + 1, (st + en) / 2 + 1, en);
+		build(v, st, (st + en) / 2, 2 * p);
+		build(v, (st + en) / 2 + 1, en, 2 * p + 1);
 		tree[p] = operation(tree[2 * p], tree[2 * p + 1]);
 	}
 	void update(int idx, int val, int st, int en, int p) {
-		if (st > idx or en < idx)return;
-		if (st == en)return tree[p] = data(val), void();
+		if (idx<st or idx>en)return;
+		if (st == en) return tree[p] = data(val), void();
 		update(idx, val, st, (st + en) / 2, 2 * p);
 		update(idx, val, (st + en) / 2 + 1, en, 2 * p + 1);
 		tree[p] = operation(tree[2 * p], tree[2 * p + 1]);
@@ -51,8 +51,8 @@ public:
 	data operation(data l, data r) {
 		data res(0);
 		res.sum = l.sum + r.sum;
-		res.suff = max(r.suff, l.suff + r.sum);
-		res.pref = max(l.pref, r.pref + l.sum);
+		res.pref = max(l.pref, l.sum + r.pref);
+		res.suff = max(r.suff, r.sum + l.suff);
 		res.best = max({ l.best,r.best,l.suff + r.pref });
 		return res;
 	}
@@ -64,7 +64,7 @@ void solve() {
 	for (int i = 1; i <= n; i++)
 		cin >> v[i];
 	segmentTree tr;
-	tr.build(v, 1, 1, n);
+	tr.build(v, 1, n, 1);
 	cout << tr.curBest() << endl;
 	while (m--)
 	{
