@@ -60,13 +60,12 @@ public:
 	}
 	ll getRange(ll s, ll e, ll p, ll l, ll r) {
 		if (s >= l and e <= r)return tree[p];
-		relax(s, e, p);
 		if (l > (s + e) / 2)
 			return getRange((s + e) / 2 + 1, e, 2 * p + 1, l, r);
 		else if (r <= (s + e) / 2)
-			return getRange(s, (s + e) / 2, 2 * p + 1, l, r);
+			return getRange(s, (s + e) / 2, 2 * p, l, r);
 		else
-			return getRange(s, (s + e) / 2, 2 * p + 1, l, r) + getRange((s + e) / 2 + 1, e, 2 * p + 1, l, r);
+			return getRange(s, (s + e) / 2, 2 * p, l, r) + getRange((s + e) / 2 + 1, e, 2 * p + 1, l, r);
 	}
 };
 void solve() {
