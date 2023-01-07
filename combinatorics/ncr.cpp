@@ -63,6 +63,18 @@ struct comb {
 		
 		return (fc[n] * invfc[fc[r]] % Mod * invfc[fc[n - r]] % Mod + Mod) % Mod;
 	}
+	//only for small range ==> can overflow
+	ll getC(ll n, int r)
+	{
+		if (r > n) return 0;
+		ll res = 1;
+		for (int i = 0; i < r; i++)
+		{
+			res *= n - i;
+			res /= i + 1;
+		}
+		return res;
+	}
 };
 int main()
 {
