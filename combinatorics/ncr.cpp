@@ -84,6 +84,12 @@ struct comb {
 		if (pow % 2 == 1)u = (u * base) % mod;
 		return u;
 	}
+	ll add(ll a, ll b, ll mod = Mod) {
+	return ((a % mod + b % mod) % mod + mod) % mod;
+	}
+	ll mul(ll a, ll b, ll mod = Mod) {
+	return ((a % mod * b % mod) % mod + mod) % mod;
+	}
 };
 
 
