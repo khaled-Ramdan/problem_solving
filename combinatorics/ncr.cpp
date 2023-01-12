@@ -75,14 +75,15 @@ struct comb {
 		}
 		return res;
 	}
-};
-ll modpow(ll base,ll pow,int mod){
+	ll modpow(ll base,ll pow,int mod){
 	if(pow==0)return 1%mod;
 	ll u=modpow(base,pow/2,mod);
 	u= (u*u)%mod;
 	if(pow%2==1)u=(u*base)%mod;
 	return u;
-}
+	}
+};
+
 
 int main()
 {
