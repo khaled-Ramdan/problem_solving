@@ -37,10 +37,12 @@ struct combination {
 //calculate until 1e6 in O(log(n))
 //can calculate in O(1) if Mod is smaller than 1e6
 struct comb {
-	vector<ll>fc,invfc;
+	vector<ll>fc, invfc;
 	int n;
+	ll MOD;
 	comb(int n = 1e6, ll Mod = Mod) {
 		this->n = n;
+		MOD = Mod;
 		fc.assign(n, 0);
 		invfc.assign(n, 0);
 		factClc();
@@ -49,19 +51,19 @@ struct comb {
 	void factClc() {
 		fc[0] = 1;
 		for (int i = 1; i < n; i++)
-			fc[i] = (fc[i - 1LL] % Mod * i % Mod) % Mod;
+			fc[i] = (fc[i - 1LL] % MOD * i % MOD) % MOD;
 	}
 	void inverseClc() {
 		invfc[1] = 1;
-		for (int i = 2; i < Mod; i++)
-			invfc[i] = Mod - (Mod / i) * invfc[Mod % i] % Mod;
+		for (int i = 2; i < MOD; i++)
+			invfc[i] = MOD - (MOD / i) * invfc[MOD % i] % MOD;
 	}
 	ll nCr(ll n, ll r) {
-		return (fc[n] * inv(fc[r] * fc[n - r] % Mod) + Mod) % Mod;
+		return (fc[n] * inv(fc[r] * fc[n - r] % MOD) + MOD) % MOD;
 	}
 	ll nCrFast(ll n, ll r) {
-		
-		return (fc[n] * invfc[fc[r]] % Mod * invfc[fc[n - r]] % Mod + Mod) % Mod;
+ 
+		return (fc[n] * invfc[fc[r]] % MOD * invfc[fc[n - r]] % MOD + MOD) % MOD;
 	}
 	//only for small range ==> can overflow
 	ll getC(ll n, int r)
@@ -75,12 +77,12 @@ struct comb {
 		}
 		return res;
 	}
-	ll modpow(ll base,ll pow,int mod=Mod){
-	if(pow==0)return 1%mod;
-	ll u=modpow(base,pow/2,mod);
-	u= (u*u)%mod;
-	if(pow%2==1)u=(u*base)%mod;
-	return u;
+	ll modpow(ll base, ll pow, ll mod = Mod) {
+		if (pow == 0)return 1 % mod;
+		ll u = modpow(base, pow / 2, mod);
+		u = (u * u) % mod;
+		if (pow % 2 == 1)u = (u * base) % mod;
+		return u;
 	}
 };
 
