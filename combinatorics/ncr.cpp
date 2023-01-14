@@ -14,36 +14,16 @@ ll inv(ll a, ll b = Mod) { return 1 < a ? b - inv(b % a, a) * b / a : 1; }
 const int dx[9] = { 0, 0, 1, -1, 1, 1, -1, -1, 0 };
 const int dy[9] = { 1, -1, 0, 0, -1, 1, 1, -1, 0 };
 //calculate until 1000*1000 in O(1)
-struct combination {
-	vector<vector<ll>>C;
-	int n;
-	combination(int n = 1001, ll Mod = Mod) {
-		this->n = n;
-		C = vector<vector<ll>>(n, vector<ll>(n));
-		init();
-	}
-	void init() {
-		C[0][0] = 1;
-		for (int i = 1; i < n; i++) {
-			C[i][0] = C[i][i] = 1;
-			for (int j = 1; j < i; j++)
-				C[i][j] = (C[i - 1][j] % Mod + C[i - 1][j - 1] % Mod) % Mod;
-		}
-	}
-	ll nCr(ll n, ll r) {
-		return C[n][r];
-	}
-};
-//calculate until 1e6 in O(log(n))
-//can calculate in O(1) if Mod is smaller than 1e6
 struct comb {
-	vector<ll>fc, invfc;
+	vector<ll>fc, invfc, fib, dr;
 	int n;
 	ll MOD;
 	comb(int n = 1e6, ll Mod = Mod) {
 		this->n = n;
 		MOD = Mod;
 		fc.assign(n, 0);
+		fib.assign(n, 0);
+		dr.assign(n, 0);
 		invfc.assign(n, 0);
 		factClc();
 		//inverseClc(); //can only be used if MOD < 1e6
@@ -62,7 +42,7 @@ struct comb {
 		return (fc[n] * inv(fc[r] * fc[n - r] % MOD) + MOD) % MOD;
 	}
 	ll nCrFast(ll n, ll r) {
- 
+
 		return (fc[n] * invfc[fc[r]] % MOD * invfc[fc[n - r]] % MOD + MOD) % MOD;
 	}
 	//only for small range ==> can overflow
@@ -77,18 +57,30 @@ struct comb {
 		}
 		return res;
 	}
-	ll modpow(ll base, ll pow, ll mod = Mod) {
-		if (pow == 0)return 1 % mod;
-		ll u = modpow(base, pow / 2, mod);
-		u = (u * u) % mod;
-		if (pow % 2 == 1)u = (u * base) % mod;
+	ll modpow(ll base, ll pow) {
+		if (pow == 0)return 1 % MOD;
+		ll u = modpow(base, pow / 2);
+		u = (u * u) % MOD;
+		if (pow % 2 == 1)u = (u * base) % MOD;
 		return u;
 	}
-	ll add(ll a, ll b, ll mod = Mod) {
-	return ((a % mod + b % mod) % mod + mod) % mod;
+	ll add(ll a, ll b) {
+		return ((a % MOD + b % MOD) % MOD + MOD) % MOD;
 	}
-	ll mul(ll a, ll b, ll mod = Mod) {
-	return ((a % mod * b % mod) % mod + mod) % mod;
+	ll mul(ll a, ll b) {
+		return ((a % MOD * b % MOD) % MOD + MOD) % MOD;
+	}
+	void derrangement() {
+		dr[0] = 1;
+		dr[1] = 0;
+		for (int i = 2; i < n; i++)
+			dr[i] = mul((i - 1LL), add(dr[i - 1], dr[i - 2]));
+	}
+	void fibonacci() {
+		fib[0] = 1;
+		fib[1] = 2;
+		for (int i = 2; i < n; i++)
+			fib[i] = fib[i - 1] + fib[i - 2];
 	}
 };
 
