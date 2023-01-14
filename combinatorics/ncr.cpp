@@ -80,7 +80,7 @@ struct comb {
 		fib[0] = 1;
 		fib[1] = 2;
 		for (int i = 2; i < n; i++)
-			fib[i] = fib[i - 1] + fib[i - 2];
+			fib[i] = add(fib[i - 1] , fib[i - 2]);
 	}
 };
 
