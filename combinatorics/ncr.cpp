@@ -133,4 +133,7 @@ int main()
 	(nC0)^2 + (nC1)^2 + ... + (nCn)^2 = (2nCn)
 	(nC1) + 2 (nC2)+ ... + n(nCn) = n* 2^(n-1)
 	nC0 + (n-1)C1 + (n-2)C2 + ... 0Cn = Fibonacci(n+1)
+	The number of ways to place k identical items into n different places when any place can contain any amount of items
+	is the definition of the number of k-combinations with repetitions:
+	ans = C[n+k-1][k]
 */
