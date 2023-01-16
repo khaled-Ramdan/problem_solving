@@ -14,6 +14,29 @@ ll inv(ll a, ll b = Mod) { return 1 < a ? b - inv(b % a, a) * b / a : 1; }
 const int dx[9] = { 0, 0, 1, -1, 1, 1, -1, -1, 0 };
 const int dy[9] = { 1, -1, 0, 0, -1, 1, 1, -1, 0 };
 //calculate until 1000*1000 in O(1)
+//calculate until 1000*1000 in O(1)
+struct combination {
+	vector<vector<ll>>C;
+	int n;
+	combination(int n = 1001, ll Mod = Mod) {
+		this->n = n;
+		C = vector<vector<ll>>(n, vector<ll>(n));
+		init();
+	}
+	void init() {
+		C[0][0] = 1;
+		for (int i = 1; i < n; i++) {
+			C[i][0] = C[i][i] = 1;
+			for (int j = 1; j < i; j++)
+				C[i][j] = (C[i - 1][j] % Mod + C[i - 1][j - 1] % Mod) % Mod;
+		}
+	}
+	ll nCr(ll n, ll r) {
+		return C[n][r];
+	}
+};
+//calculate until 1e6 in O(log(n))
+//can calculate in O(1) if Mod is smaller than 1e6
 struct comb {
 	vector<ll>fc, invfc, fib, dr;
 	int n;
