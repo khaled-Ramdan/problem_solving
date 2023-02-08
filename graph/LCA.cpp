@@ -14,69 +14,88 @@ ll lcm(ll a, ll b) { return a * b / gcd(a, b); }
 ll inv(ll a, ll b = Mod) { return 1 < a ? b - inv(b % a, a) * b / a : 1; }
 const int dx[9] = { 0, 0, 1, -1, 1, 1, -1, -1, 0 };
 const int dy[9] = { 1, -1, 0, 0, -1, 1, 1, -1, 0 };
-vector<vector<int>>g, anc;
-vector<int>dpth;
-int n, m, u, v, q, k;
-void dfs(int u, int p) {
-	for (int& v : g[u]) {
-		if (v == p)
-			continue;
-		dpth[v] = dpth[u] + 1;
-		anc[v][0] = u;
-		for (int i = 1; i < m; i++)
-			anc[v][i] = anc[anc[v][i - 1]][i - 1];
-		dfs(v, u);
+struct LCA {
+	int n = 0, m = 0, root = 0;
+	vector<vector<int>>g, anc;
+	vector<int>dpth;
+	LCA(){}
+	LCA(int n_, vector<vector<int>>g_, int root_ = 1) {
+		n = n_;
+		g = g_;
+		root = root_;
+		dpth.resize(n + 1);
+		m = int(ceil(log2(n)));
+		anc = vector<vector<int>>(n + 1, vector<int>(m + 1));
+		init(root);
 	}
-}
-int k_anc(int u, int k) {
-	//if (k > dpth[u])
-		//return -1;
-	for (int i = 0; i < m; i++) {
-		if (k & (1 << i))
-			u = anc[u][i];
+	void init(int root) {
+		anc[root][0] = root;
+		dpth[root] = 0;
+		dfs(root, 0);
 	}
-	return u;
-}
-void init(int root) {
-	anc[root][0] = root;
-	dpth[root] = 0;
-	dfs(root, 0);
-}
-int LCA(int u, int v) {
-	if (dpth[u] < dpth[v])
-		swap(dpth[u], dpth[v]);
-	int k = dpth[u] - dpth[v];
-	u = k_anc(u, k);
-	if (u == v)
-		return u;
-	for (int i = m - 1; i >= 0; i--) {
-		if (anc[u][i] != anc[v][i]) {
-			u = anc[u][i];
-			v = anc[u][i];
+	void dfs(int u, int p) {
+		for (int& v : g[u]) {
+			if (v == p)
+				continue;
+			dpth[v] = dpth[u] + 1;
+			anc[v][0] = u;
+			for (int i = 1; i < m; i++)
+				anc[v][i] = anc[anc[v][i - 1]][i - 1];
+			dfs(v, u);
 		}
 	}
-	return anc[u][0];
-}
-void solve() {
-	cin >> n;
-	dpth = vector<int>(n + 1);
-	m = int(log2(n)) + 1;
-	anc = vector<vector<int>>(1+n, vector<int>(m));
-	g = vector<vector<int>>(n + 1);
-	for (int i = 1; i < n; i++) {
-		cin >> u >> v;
-		g[u].push_back(v);
-		g[v].push_back(u);
+	int k_anc(int u, int k) {
+		for (int i = 0; i < m; i++)
+			if (k & (1 << i))
+				u = anc[u][i];
+		return u;
 	}
-	init(1);
+	int lca(int u, int v) {
+		if (dpth[u] < dpth[v])
+			swap(u, v);
+		int k = dpth[u] - dpth[v];
+		u = k_anc(u, k);
+		if (u == v)
+			return u;
+		for (int i = m - 1; i >= 0; i--) {
+			if (anc[u][i] == anc[v][i])
+				continue;
+			u = anc[u][i];
+			v = anc[v][i];
+		}
+		return anc[u][0];
+	}
+};
+void solve() {
+	int n, x, s, root = 0, q, u, v;
+	cin >> n;
+	vector<vector<int>>g(n + 1);
+	vector<int>rt(n + 1);
+	for (int i = 1; i <= n; i++) {
+		cin >> s;
+		for (int j = 0; j < s; j++) {
+			cin >> x;
+			g[i].push_back(x);
+			g[x].push_back(i);
+			rt[x] = 1;
+		}
+	}
+	for (int i = 1; i <= n; i++)
+		if (!rt[i])root = i;
+	LCA lc(n, g, root);
 	cin >> q;
 	while (q--)
 	{
 		cin >> u >> v;
-		cout << LCA(u, v) << endl;
+		cout << lc.lca(u, v) << endl;
 	}
 }
 int main() {
 	IO;
-	solve();
+	int t;
+	cin >> t;
+	for(int i=1;i<=t;i++){
+		cout << "Case " << i << ":\n";
+		solve(); 
+	}
 }
