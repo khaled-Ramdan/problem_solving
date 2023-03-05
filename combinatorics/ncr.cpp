@@ -13,6 +13,54 @@ ll lcm(ll a, ll b) { return a * b / gcd(a, b); }
 ll inv(ll a, ll b = Mod) { return 1 < a ? b - inv(b % a, a) * b / a : 1; }
 const int dx[9] = { 0, 0, 1, -1, 1, 1, -1, -1, 0 };
 const int dy[9] = { 1, -1, 0, 0, -1, 1, 1, -1, 0 };
+
+struct Com {
+	vector<ll>fc; int n; ll MOD;
+	comb(int n = 1e6, ll Mod = Mod) {
+		this->n = n;
+		MOD = Mod;
+		fc.assign(n, 0);
+		factClc();
+	}
+	void factClc() {
+		fc[0] = 1;
+		for (int i = 1; i < n; i++)
+			fc[i] = (fc[i - 1LL] % MOD * i % MOD) % MOD;
+	}
+	ll nCr(ll n, ll r) {
+		return (fc[n] * inv(fc[r] * fc[n - r] % MOD) + MOD) % MOD;
+	}
+	ll getC(ll n, int r)	//only for small range ==> can overflow
+	{
+		if (r > n) return 0;
+		ll res = 1;
+		for (int i = 0; i < r; i++)
+		{
+			res *= n - i;
+			res /= i + 1;
+		}
+		return res;
+	}
+	ll modpow(ll base, ll pow) {
+		if (pow == 0)return 1 % MOD;
+		ll u = modpow(base, pow / 2);
+		u = (u * u) % MOD;
+		if (pow % 2 == 1)u = (u * base) % MOD;
+		return u;
+	}
+	ll add(ll a, ll b) {
+		return ((a % MOD + b % MOD) % MOD + MOD) % MOD;
+	}
+	ll mul(ll a, ll b) {
+		return ((a % MOD * b % MOD) % MOD + MOD) % MOD;
+	}
+};
+
+
+
+
+
+
 //calculate until 1000*1000 in O(1)
 //calculate until 1000*1000 in O(1)
 struct combination {
