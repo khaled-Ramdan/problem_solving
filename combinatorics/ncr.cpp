@@ -16,7 +16,7 @@ const int dy[9] = { 1, -1, 0, 0, -1, 1, 1, -1, 0 };
 
 struct Com {
 	vector<ll>fc; int n; ll MOD;
-	comb(int n = 1e6, ll Mod = Mod) {
+	Com(int n = 1e6, ll Mod = Mod) {
 		this->n = n;
 		MOD = Mod;
 		fc.assign(n, 0);
