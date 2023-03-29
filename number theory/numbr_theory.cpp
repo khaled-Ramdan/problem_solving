@@ -9,7 +9,7 @@ vector<pair<ll, ll>>generate_divisors(ll n) {//generate two numbers there produc
 }
 vector<ll>divisors(ll n) {//get all divisors of n
 	vector<ll>ans;
-	for (int i = 1;i*i < n;i++)if (n % i == 0)ans.push_back(i), ans.push_back(n / i);
+	for (ll i = 1;i*i < n;i++)if (n % i == 0)ans.push_back(i), ans.push_back(n / i);
 	if (ll(sqrt(n)) * ll(sqrt(n)) == n)ans.push_back(ll(sqrt(n)));
 	return ans;
 }
