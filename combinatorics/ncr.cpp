@@ -184,4 +184,8 @@ int main()
 	The number of ways to place k identical items into n different places when any place can contain any amount of items
 	is the definition of the number of k-combinations with repetitions:
 	ans = C[n+k-1][k]
+	
+	
+	in pascal triangle
+	The number of odd elements in row i = 2 ^ (#1's in the binary representation of i)
 */
