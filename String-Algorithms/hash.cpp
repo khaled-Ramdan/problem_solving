@@ -40,46 +40,51 @@ preprocessing power and simulate pop and push operations for the string
 class RabinCarb
 {
 private:
-    const ll x = 128, mod = 1e9 + 7;
-    int len = 0;
+    int x = 128, mod = 1e9 + 7;
     vector<int> power;
 
 public:
-    RabinCarb(int n)
+    int len = 0;
+    int hash = 0;
+    RabinCarb(int n,int hashPrameter=128)
     {
+        x = hashPrameter;
         power = vector<int>(n + 7);
         power[0] = 1;
         for (int i = 1; i < n + 7; i++)
             power[i] = mul(x, power[i - 1]);
     }
-    ll hash = 0;
-    ll pushBack(char ch)
+    int pushBack(char ch)
     {
         len++;
         return hash = add(mul(hash, x), ch);
     }
-    ll popFront(char ch)
+    int popFront(char ch)
     {
         len--;
         return hash = add(hash, -mul(ch, power[len]));
     }
-    ll popBack(char ch)
+    int popBack(char ch)
     {
         len--;
         return hash = mul(add(hash, -ch), inv(x, mod));
     }
-    ll pushFront(char ch)
+    int pushFront(char ch)
     {
         len++;
         return hash = add(hash, mul(ch, power[len - 1]));
     }
-    ll add(ll a, ll b)
+    int add(int a, int b)
     {
         return ((a % mod + b % mod) % mod + mod) % mod;
     }
-    ll mul(ll a, ll b)
+    int mul(int a, int b)
     {
-        return ((a % mod * b % mod) % mod + mod) % mod;
+        return ((a % mod *1ll* b % mod) % mod + mod) % mod;
+    }
+    void clear(){
+        len = 0;
+        hash = 0;
     }
 };
 
