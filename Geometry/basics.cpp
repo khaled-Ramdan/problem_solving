@@ -112,7 +112,7 @@ T triple(Point<T> p1, Point<T> p2, Point<T> p3)
 template <class T>
 T intersect(Point<T> a1, Point<T> d1, Point<T> a2, Point<T> d2) // for lines
 {
-    a1 + cross(a2 - a1, d2) / cross(d1, d2) * d1;
+    return a1 + cross(a2 - a1, d2) / cross(d1, d2) * d1;
 }
 template <class T>
 Point<T> intersect(Point<T> a1, Point<T> n1, Point<T> a2, Point<T> n2, Point<T> a3, Point<T> n3) // for lines
