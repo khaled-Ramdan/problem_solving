@@ -9,6 +9,7 @@ const int dy[9] = {1, -1, 0, 0, -1, 1, 1, -1, 0};
 const double PI = acos(-1.0);
 const double EPS = 1e-10;
 typedef complex<double> point;
+#define EPS 0.000'000'001
 #define x real()
 #define y imag()
 #define angle(a) atan2(a.imag(), a.real())
@@ -22,10 +23,22 @@ typedef complex<double> point;
 #define rotateAround(p, ang, about) rotate0(vec(about - p), ang) + about
 #define reflect0(v, m) conj(v / m) * m
 #define reflect(v, m, about) reflect0(vec(v, about), vec(m, about)) + about
+
+bool isCollinear(point a, point b, point c)
+{
+    return fabs(crossProduct(vec(a, b), vec(a, c))) < EPS;
+}
+// Point C distance to line A-B
+double distanceToLine(point a, point b, point c)
+{
+    double dist = crossProduct(vec(a, b), vec(a, c)) / length(vec(b, a));
+    return fabs(dist);
+}
+
 void solve()
 {
-    point a(1, 6), b(6, 2);
-    cout << dotProduct(a, b) << " " << crossProduct(a, b) << endl;
+    point a(0, 1), b(0, 3), c(0, 2);
+    cout << isCollinear(a, c, b) << endl;
 }
 int main()
 {
