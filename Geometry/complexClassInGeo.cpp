@@ -98,9 +98,8 @@ pair<double, point> findCircle(point a, point b, point c)
     double len = length(a);
     return make_pair(len, center);
 }
-int dcmp(double a, double b)
-{
-    
+int dcmp(double a, double b) {
+	return (fabs(a - b) <= EPS ? 0 : (a < b ? -1 : 1));
 }
 // return 0,1 or 2 points => using parameteric parameters / substitution method
 vector<point> intersectLineCircle(point p0, point p1, point C, double r)
