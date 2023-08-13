@@ -985,6 +985,164 @@ struct segtree
         return sum(l,r,0,0,size);
     }*/
 };
+//.... 
+ll n, m = 0, k;
+using namespace std;
+ll a[1001][1001];
+ll arr[4000][4000];
+
+struct segtree
+{
+    int size;
+    void init(int n)
+    {
+        size = 1;
+        while (size < n)
+            size *= 2;
+        // arr.resize(size,vector<ll>(size,0));
+        // for(int i=0;i<size*2;i++)arr.push_back(NEUel);
+    }
+    void build_y(int x, int lx, int rx, int y, int ly, int ry)
+    {
+        if (ry - ly == 1)
+        {
+            if (lx == rx - 1)
+                arr[x][y] = a[lx][ly];
+            else
+                arr[x][y] = arr[x * 2 + 1][y] + arr[x * 2 + 2][y];
+        }
+        else
+        {
+            int my = (ly + ry) / 2;
+            build_y(x, lx, rx, y * 2 + 1, ly, my);
+            build_y(x, lx, rx, y * 2 + 2, my, ry);
+            arr[x][y] = arr[x][y * 2 + 1] + arr[x][y * 2 + 2];
+        }
+    }
+    void build_x(int x, int lx, int rx)
+    {
+        if (rx - lx != 1)
+        {
+            int m = (lx + rx) / 2;
+            build_x(2 * x + 1, lx, m);
+            build_x(2 * x + 2, m, rx);
+        }
+        build_y(x, lx, rx, 0, 0, size);
+        // arr[x]=merge(arr[2*x+1],arr[2*x+2]);
+    }
+    void build()
+    {
+        build_x(0, 0, size);
+    }
+    void update_y(int x, int lx, int rx, int y, int ly, int ry, int a, int b, int new_val)
+    {
+        if (ly == ry - 1)
+        {
+            if (lx == rx - 1)
+            {
+                arr[x][y] = (arr[x][y] + 1) % 2;
+                // cout<<arr[x][y]<<'\n';
+            }
+            else
+                arr[x][y] = arr[x * 2 + 1][y] + arr[x * 2 + 2][y];
+        }
+        else
+        {
+            int my = (ly + ry) / 2;
+            if (b < my)
+                update_y(x, lx, rx, y * 2 + 1, ly, my, a, b, new_val);
+            else
+                update_y(x, lx, rx, y * 2 + 2, my, ry, a, b, new_val);
+            arr[x][y] = arr[x][y * 2 + 1] + arr[x][y * 2 + 2];
+        }
+    }
+
+    void update_x(int x, int lx, int rx, int a, int b, int new_val)
+    {
+        if (lx != rx - 1)
+        {
+            int mx = (lx + rx) / 2;
+            if (a < mx)
+                update_x(x * 2 + 1, lx, mx, a, b, new_val);
+            else
+                update_x(x * 2 + 2, mx, rx, a, b, new_val);
+        }
+        update_y(x, lx, rx, 0, 0, size, a, b, new_val);
+    }
+    void update_x(int a, int b, int val = 0)
+    {
+        update_x(0, 0, size, a, b, val);
+    }
+
+    int sum_y(int x, int y, int tly, int try_, int ly, int ry)
+    {
+        if (tly >= ry || try_ <= ly)
+            return 0;
+        if (ly <= tly && try_ <= ry)
+            return arr[x][y];
+        int tmy = (tly + try_) / 2;
+        return sum_y(x, y * 2 + 1, tly, tmy, ly, ry) + sum_y(x, y * 2 + 2, tmy, try_, ly, ry);
+    }
+    int sum_x(int x, int tlx, int trx, int lx, int rx, int ly, int ry)
+    {
+        if (tlx >= rx || trx <= lx)
+            return 0;
+        if (lx <= tlx && trx <= rx)
+            return sum_y(x, 0, 0, size, ly, ry);
+        int tmx = (tlx + trx) / 2;
+        return sum_x(x * 2 + 1, tlx, tmx, lx, rx, ly, ry) + sum_x(x * 2 + 2, tmx, trx, lx, rx, ly, ry);
+    }
+    int sum(int a, int b, int c, int d)
+    {
+        return sum_x(0, 0, size, a, b, c, d);
+    }
+};
+
+void fn()
+{
+    cin >> n >> m;
+    segtree st;
+    st.init(n);
+    string s;
+    for (int i = 0; i < n; i++)
+    {
+        cin >> s;
+        for (int j = 0; j < n; j++)
+        {
+            a[i][j] = (int)(s[j] == '*');
+            // cout<<a[i][j]<<" ";
+        }
+        cout << '\n';
+    }
+    // cout<<1;
+    st.build();
+    // return;
+    while (m--)
+    {
+        int c;
+        ll a, b;
+        cin >> c >> a >> b;
+        if (c == 2)
+        {
+            ll d, f;
+            cin >> d >> f;
+            cout << st.sum(a - 1, d, b - 1, f) << '\n';
+        }
+        else
+        {
+            st.update_x(a - 1, b - 1);
+        }
+    }
+}
+int main()
+{
+    // fastio();
+    int t = 1;
+    // cin>>t;
+    while (t--)
+        fn();
+    return 0;
+}
 void fn()
 {
     cin >> n >> m;
