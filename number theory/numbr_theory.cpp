@@ -344,3 +344,82 @@ int find_all_solutions(int a, int b, int c, int minx, int maxx, int miny, int ma
         return 0;
     return (rx - lx) / abs(b) + 1;
 }
+//.... Mobius function 
+/*
+    Mobius function:
+            m(1) = 1
+            m(n) = 1 if n is a square free positive integer + Even number of prime factors  => m(2*3*5*7) = 1
+            m(n) = -1 if n is a square free positive integer + Odd number of prime factors  => m (2*3*5) = -1
+            m(n) = 0 if n is NOT a square free integer => m(2*3*3*7) = 0
+
+    M(n) = 1, -1, -1, 0, -1, 1, -1, 0, 0, 1, -1, 0, -1, 1
+    M(n) + 1 = 2, 0, 0, 1, 0, 2, 0, 1, 1, 2, 0, 1, 0, 2
+*/
+ll mobius(ll n)
+{
+    ll mebVal = 1;
+    for (ll i = 2; i * i <= n; i++)
+    {
+        if (n % i == 0)
+        {
+            if (n % (i * i) == 0)
+                return 0;
+            n /= i;
+            mebVal *= -1;
+        }
+    }
+    if (n)
+        mebVal *= -1;
+    return mebVal;
+}
+// generate the mobius for elements in range from 1 to n.
+vector<int> mobius_generator(int n)
+{
+    vector<int> mobius(n + 1, -1);
+    vector<bool> prime(n + 1, 1);
+
+    mobius[1] = 1, prime[1] = 0;
+
+    for (int i = 2; i <= n; i++)
+    {
+        if (!prime[i])
+            continue;
+        mobius[i] = -1;
+        for (int j = i * i; j <= n; j += i)
+        {
+            prime[j] = 0;
+            mobius[j] = j % (i * i) == 0 ? 0 : -mobius[j];
+        }
+    }
+    return mobius;
+}
+int kth_square_free(int k, int n)
+{
+    auto mob = mobius_generator(n);
+    vector<int> v(n);
+    for (int i = 1; i <= n; i++)
+        v[i] = mob[i] != 0;
+    for (int i = 2; i <= n; i++)
+        v[i] += v[i - 1];
+    return v[k];
+}
+// count triples (a, b, c) where a, b, c <= n and gcd(a, b,c) = 1
+ll coprime_triples(ll n)
+{
+    auto mobius = mobius_generator(n);
+    ll sum = 0;
+    for (ll i = 2; i <= n; i++)
+    {
+        sum -= mobius[i] * (n / i) * (n / i) * (n / i);
+    }
+    return sum;
+}
+ll square_free_index(ll val, int n)
+{
+    auto mobius = mobius_generator(n);
+    ll idx = val;
+    for (ll i = 2; i * i <= val; i++)
+        idx += mobius[i] * (val / (i * i));
+
+    return idx;
+}
