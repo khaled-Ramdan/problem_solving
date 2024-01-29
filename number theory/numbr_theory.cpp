@@ -239,3 +239,24 @@ int rec_gcd(int a, int b, int &x, int &y)
     y = x1 - y1 * (a / b);
     return d;
 }
+
+/*
+for [a*x + b*y = c]. find any solution where g is gcd(a, b)
+if c is multiple of gcd(a, b) => there is a solution where for a*x + b*y = c.
+otherwise, no solution
+*/
+bool find_any_solution(int a, int b, int c, int &x0, int &y0, int &g)
+{
+    g = rec_gcd(abs(a), abs(b), x0, y0);
+    if (c % g)
+    {
+        return false;
+    }
+    x0 *= c / g;
+    y0 *= c / g;
+    if (a < 0)
+        x0 = -x0;
+    if (b < 0)
+        y0 = -y0;
+    return true;
+}
