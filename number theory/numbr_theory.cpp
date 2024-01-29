@@ -260,3 +260,87 @@ bool find_any_solution(int a, int b, int c, int &x0, int &y0, int &g)
         y0 = -y0;
     return true;
 }
+
+
+/*
+the solution for x+y is minimum possible => 
+use the information in shift_solution from all possible solutions. 
+If a < b , we need to select smallest possible value of  cnt.
+If a > b , we need to select the largest possible value of  cnt .
+If  a = b , all solution will have the same sum x + y.
+
+OR => just get min sum when shift_solution is called every time
+*/
+int mnsum = 1e9 + 7, xmnsm = 0, ymnsm = 0;
+void shift_solution(int &x, int &y, int a, int b, int cnt)
+{
+    if (mnsum > x + y)
+    {
+        mnsum = x + y;
+        xmnsm = x, ymnsm = y;
+    }
+    x += cnt * b;
+    y -= cnt * a;
+    if (mnsum > x + y)
+    {
+        mnsum = x + y;
+        xmnsm = x, ymnsm = y;
+    }
+    cout << x << " " << y << " " << cnt << endl;
+}
+
+/*
+the function gets the number of solutions in a range for x and y
+*/
+int find_all_solutions(int a, int b, int c, int minx, int maxx, int miny, int maxy)
+{
+    int x, y, g;
+    if (!find_any_solution(a, b, c, x, y, g))
+        return 0;
+    a /= g;
+    b /= g;
+
+    int sign_a = a > 0 ? +1 : -1;
+    int sign_b = b > 0 ? +1 : -1;
+
+    shift_solution(x, y, a, b, (minx - x) / b);
+
+    if (x < minx)
+        shift_solution(x, y, a, b, sign_b);
+
+    if (x > maxx)
+        return 0;
+    int lx1 = x;
+
+    shift_solution(x, y, a, b, (maxx - x) / b);
+
+    if (x > maxx)
+        shift_solution(x, y, a, b, -sign_b);
+
+    int rx1 = x;
+
+    shift_solution(x, y, a, b, -(miny - y) / a);
+
+    if (y < miny)
+        shift_solution(x, y, a, b, -sign_a);
+
+    if (y > maxy)
+        return 0;
+    int lx2 = x;
+
+    shift_solution(x, y, a, b, -(maxy - y) / a);
+
+    if (y > maxy)
+        shift_solution(x, y, a, b, sign_a);
+
+    int rx2 = x;
+
+    if (lx2 > rx2)
+        swap(lx2, rx2);
+    int lx = max(lx1, lx2);
+    int rx = min(rx1, rx2);
+
+    if (lx > rx)
+        return 0;
+    return (rx - lx) / abs(b) + 1;
+}
