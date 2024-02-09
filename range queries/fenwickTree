@@ -14,6 +14,8 @@ vector<int> a, bit;
 */
 void add(int index, int toAdd)
 {
+    if (index == 0)
+        return;
     // add the least significant bit to i
     for (int i = index; i <= n; i += (i & -i))
         bit[i] += toAdd;
