@@ -31,10 +31,11 @@ ans:
 32
 18
 48
-
+you should take care that it works 1 based
 */
 void add(int x, int y, int toAdd)
 {
+    // handle if x == 0 or y== 0
     // add the least significant bit to i
     for (int i = x; i <= n; i += (i & -i))
         for (int j = y; j <= m; j += (j & -j))
