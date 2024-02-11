@@ -20,7 +20,7 @@ ll findParent(int i) {
 	if (i == parent[i])return i;
 	return parent[i] = findParent(parent[i]);
 }
-ll join(ll u, ll v) {
+void join(ll u, ll v) {
 	u = findParent(u);
 	v = findParent(v);
 	if (u != v) {
@@ -30,12 +30,15 @@ ll join(ll u, ll v) {
 		siz[v] += siz[u];
 	}
 }
-void solve() {
-	cin >> n;
-	parent.resize(n + 1);
+void init(){
+parent.resize(n + 1);
 	siz.resize(n + 1);
 	iota(parent.begin(), parent.end(), 0);
 	fill(siz.begin(), siz.end(), 1);
+}
+void solve() {
+	cin >> n;
+	
 }
 int main() {
 	IO;
