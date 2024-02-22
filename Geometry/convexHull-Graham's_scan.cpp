@@ -17,6 +17,8 @@ if you want to include collinear points => put the `include_collinear` to be tru
 otherwise it will be skipped
 you want to get smallest convex hull ?
 => don't include collinear points option.
+
+====> you should take care if a point is repeated 
 */
 
 struct pt
