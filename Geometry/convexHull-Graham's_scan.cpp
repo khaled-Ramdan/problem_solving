@@ -15,6 +15,8 @@ get convex hull with collinear points : 3 pints in same line
 the convex hull points is returned in counter-clockwise order
 if you want to include collinear points => put the `include_collinear` to be true
 otherwise it will be skipped
+you want to get smallest convex hull ?
+=> don't include collinear points option.
 */
 
 struct pt
