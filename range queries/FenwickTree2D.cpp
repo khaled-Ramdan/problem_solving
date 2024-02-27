@@ -33,6 +33,7 @@ ans:
 48
 you should take care that it works 1 based
 */
+// O(log n* log m)  
 void add(int x, int y, int toAdd)
 {
     // handle if x == 0 or y== 0
@@ -41,6 +42,7 @@ void add(int x, int y, int toAdd)
         for (int j = y; j <= m; j += (j & -j))
             bit[i][j] += toAdd;
 }
+// O(n*m log n* log m)  
 void build()
 {
     bit = vector<vector<int>>(n + 1, vector<int>(m + 1));
