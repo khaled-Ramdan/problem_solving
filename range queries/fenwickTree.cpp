@@ -11,7 +11,9 @@ vector<int> a, bit;
 /*
     binary indexed tree to get sum on range with update on a single value.
     could be used in sum, oxr, multiplication,...
+    
 */
+// O(log n)
 void add(int index, int toAdd)
 {
     if (index == 0)
@@ -20,12 +22,14 @@ void add(int index, int toAdd)
     for (int i = index; i <= n; i += (i & -i))
         bit[i] += toAdd;
 }
+// O(n log n)
 void build()
 {
     bit = vector<int>(n + 1);
     for (int i = 1; i <= n; i++)
         add(i, a[i]);
 }
+// O(log n)
 ll prefixSum(int index)
 {
     ll sum = 0;
@@ -34,10 +38,12 @@ ll prefixSum(int index)
         sum += bit[i];
     return sum;
 }
+// O(log n)
 int rangeSum(int l, int r)
 {
     return prefixSum(r) - prefixSum(l - 1);
 }
+// O(log n)
 void update(int index, int value)
 {
     add(index, value - a[index]);
