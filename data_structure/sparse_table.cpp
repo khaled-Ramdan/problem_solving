@@ -43,6 +43,7 @@ public:
     { // O (1) [0 based] => for overlapping operations :: min, max, gcd
         int i = lg[r - l + 1];
         int res = operation(st[i][l], st[i][r - (1 << i) + 1]);
+        return res;
     }
 
     ll sum_query(int l, int r)
