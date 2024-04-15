@@ -31,14 +31,16 @@ struct Matrix
     }
     T operation(T a, T b, T c)
     {
-        if constexpr (is_same_v<T, double> or Mod == 0)
+        if constexpr (is_same_v<T, double>)
+            return a + b * c;
+        else if (Mod == 0)
             return a + b * c;
         else
             return (a % Mod + 1ll * b * c % Mod) % Mod;
     }
 };
 template <class T>
-Matrix<T> expo_power(Matrix<T> a, ll k, ll mod = Mod)
+Matrix<T> expo_power(Matrix<T> a, ll k, ll mod)
 {
     Matrix<T> product(mod);
     for (int i = 0; i <= 1; i++)
@@ -59,8 +61,8 @@ void solve()
     cin >> n >> p;
     Matrix<double> re;
     re.init(1 - p, p, p, 1 - p);
-
-    Matrix z = expo_power(re, n);
+ 
+    Matrix z = expo_power(re, n, 0);
     double ans = z.a[0][0];
     cout << fixed << setprecision(10) << ans << endl;
 }
