@@ -11,22 +11,23 @@ const int dy[9] = {1, -1, 0, 0, -1, 1, 1, -1, 0};
 template <class T>
 struct Matrix
 {
-    T a[2][2] = {{0, 0}, {0, 0}};
+    vector<vector<T>> matrix;
     ll Mod = 0;
     Matrix() {}
-    Matrix(ll mod) { Mod = mod; }
-    void init(T r00, T r01, T r10, T r11)
+    Matrix(int n, ll mod) { init(n, mod); }
+    void init(int n, ll mod)
     {
-        a[0][0] = r00, a[0][1] = r01;
-        a[1][0] = r10, a[1][1] = r11;
+        Mod = mod;
+        matrix = vector<vector<T>>(n, vector<T>(n));
     }
     Matrix operator*(const Matrix &other)
     {
-        Matrix product(Mod);
-        for (int i = 0; i <= 1; i++)
-            for (int j = 0; j <= 1; j++)
-                for (int k = 0; k <= 1; k++)
-                    product.a[i][k] = operation(product.a[i][k], a[i][j], other.a[j][k]);
+        int n = matrix.size();
+        Matrix product(n, Mod);
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < n; j++)
+                for (int k = 0; k < n; k++)
+                    product.matrix[i][k] = operation(product.matrix[i][k], matrix[i][j], other.matrix[j][k]);
         return product;
     }
     T operation(T a, T b, T c)
@@ -40,11 +41,13 @@ struct Matrix
     }
 };
 template <class T>
-Matrix<T> expo_power(Matrix<T> a, ll k, ll mod)
+Matrix<T> expo_power(Matrix<T> a, ll k)
 {
-    Matrix<T> product(mod);
-    for (int i = 0; i <= 1; i++)
-        product.a[i][i] = 1;
+    int n = a.matrix.size();
+    Matrix<T> product(n, a.Mod);
+    for (int i = 0; i < n; i++)
+        product.matrix[i][i] = 1;
+
     while (k > 0)
     {
         if (k % 2)
@@ -56,15 +59,27 @@ Matrix<T> expo_power(Matrix<T> a, ll k, ll mod)
 }
 void solve()
 {
-    int n;
-    double p;
-    cin >> n >> p;
-    Matrix<double> re;
-    re.init(1 - p, p, p, 1 - p);
- 
-    Matrix z = expo_power(re, n, 0);
-    double ans = z.a[0][0];
-    cout << fixed << setprecision(10) << ans << endl;
+    ll n, m, k;
+    cin >> n >> m >> k;
+    Matrix<ll> mat(n, Mod);
+
+    for (int i = 0; i < m; i++)
+    {
+        int x, y;
+        cin >> x >> y;
+        x--, y--;
+        mat.matrix[x][y]++;
+    }
+
+    mat = expo_power(mat, k);
+    ll ans = 0;
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++)
+        {
+            ans += mat.matrix[i][j];
+            ans %= Mod;
+        }
+    cout << ans << endl;
 }
 int main()
 {
