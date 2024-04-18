@@ -192,7 +192,8 @@ void spf() {
 	for (int i = 2; i < N; i++) {
 		if (p[i])continue;
 		for (ll j = i; j < N; j += i)
-			p[j] = i;
+			if(!p[j])
+			   p[j] = i;
 	}
 }
 map<ll, ll> factors(ll n) {
